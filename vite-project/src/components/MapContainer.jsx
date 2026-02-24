@@ -1,35 +1,28 @@
-import { useState, useRef } from "react";
-import Corridor from "./Corridor";
-import Room2_1 from "./rooms/Room2_1"
+import Room from "./Room";
+import rooms from "../data/rooms";
 
-export default function MapContainer() {
-  const [scale, setScale] = useState(1);
-  const containerRef = useRef(null);
-
-  const handleWheel = (e) => {
-    e.preventDefault();
-    const newScale = scale - e.deltaY * 0.001;
-    if (newScale > 0.5 && newScale < 2.5) {
-      setScale(newScale);
-    }
-  };
-
+const MapContainer = () => {
   return (
     <div
-      ref={containerRef}
-      className="map-wrapper"
-      onWheel={handleWheel}
+      style={{
+        position: "relative",
+        width: "2000px",
+        height: "1000px",
+        backgroundColor: "#ddd"
+      }}
     >
-      <div
-        className="map"
-        style={{ transform: `scale(${scale})` }}
-      >
-        <Corridor />
-
-        {/* 教室配置 */}
-        <Room2_1 x={300} y={400} />
-
-      </div>
+      {rooms.map((room) => (
+        <Room
+          key={room.id}
+          name={room.name}
+          x={room.x}
+          y={room.y}
+          width={room.width}
+          height={room.height}
+        />
+      ))}
     </div>
   );
-}
+};
+
+export default MapContainer;
