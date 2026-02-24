@@ -1,22 +1,25 @@
 const Room = ({ name, x, y, width, height }) => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        width: width,
-        height: height,
-        backgroundColor: "#f5d142",
-        border: "2px solid black",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontWeight: "bold"
-      }}
-    >
-      {name}
-    </div>
+    <>
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill="yellow"
+        stroke="black"
+      />
+      <text
+        x={x + width / 2}
+        y={y + height / 2}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize="14"
+        fontWeight="bold"
+      >
+        {name}
+      </text>
+    </>
   );
 };
 
