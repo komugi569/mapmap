@@ -33,21 +33,17 @@ const MapContainer = () => {
             height: "800px",
           }}
         >
-          <svg width="1500" height="800">
+          <svg width="1600" height="900">
 
-            {/* 🟤 通路（肌色部分） */}
-            <path
-              d="
-                M200 150
-                H1400
-                V230
-                H900
-                V500
-                H200
-                Z
-              "
-              fill="#e8d3b5"
-            />
+  {/* 下敷き画像 */}
+  <image
+    href="/map.png"   // publicフォルダに画像を入れる
+    x="0"
+    y="0"
+    width="1600"
+    height="900"
+    opacity="0.4"     // 半透明
+  />
 
             {/* 🟡 教室を自動生成 */}
             {rooms.map((room) => (
