@@ -37,7 +37,7 @@ const MapContainer = () => {
 
   {/* 下敷き画像 */}
   <image
-    href="/map.png"   // publicフォルダに画像を入れる
+    href="/map.jpg"   // publicフォルダに画像を入れる
     x="0"
     y="0"
     width="1600"
