@@ -33,24 +33,21 @@ const MapContainer = () => {
             height: "800px",
           }}
         >
-          <svg width="1600" height="900">
-
-  {/* 下敷き画像 */}
+      <svg
+  viewBox="0 0 1848 1245"
+  width="100%"
+  height="auto"
+>
   <image
-    href="/map.jpg"   // publicフォルダに画像を入れる
+    href="/map.jpg"
     x="0"
     y="0"
-    width="1600"
-    height="900"
-    opacity="0.4"     // 半透明
+    width="1848"
+    height="1245"
+    opacity="0.4"
   />
+</svg>
 
-            {/* 🟡 教室を自動生成 */}
-            {rooms.map((room) => (
-              <Room key={room.id} {...room} />
-            ))}
-
-          </svg>
         </div>
       </div>
     </div>
