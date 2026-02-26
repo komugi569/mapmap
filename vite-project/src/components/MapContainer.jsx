@@ -44,8 +44,21 @@ const MapContainer = () => {
     y="0"
     width="1848"
     height="1245"
-    opacity="0.4"
+    opacity="0.5"
   />
+
+
+  <path
+  d="
+    M 200 150
+    H 1650
+    V 1050
+    H 200
+    Z
+  "
+  fill="rgba(232,211,181,0.7)"
+/>
+
 </svg>
 
         </div>
