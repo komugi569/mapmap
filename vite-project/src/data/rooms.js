@@ -31,15 +31,15 @@ const rooms = [
 { id: "225", label:"225", x: 835, y: 335, width: 77.5, height: 85, breakMode: "none", fill: "white"},
 { id: "WC", label:"WC", x: 912.5, y: 335, width: 38.75, height: 85, breakMode:"none", fill:"#8ecae6"},
 { id:"WC" ,label:"WC" ,x :951.25 ,y :335 ,width :38.75 ,height :85 ,breakMode:"none" ,fill:"#f5bfc8"},
-{ id:"準備室1" ,label:"準備室" ,x :450,y :220,width :40,height :80, fontSize: 18, vertical:true, breakMode:"none" ,fill:"white"},
-{ id: "準備室2", label:"準備室", x: 602.5, y: 220, width: 40, height: 80, fontSize: 18, vertical: true, breakMode: "none", fill: "white"},
-{ id: "準備室3", label:"準備室", x: 757.5, y: 220, width: 40, height: 80, fontSize: 18, vertical: true, breakMode: "none", fill: "white"},
-{ id: "美術室", label:"美術室", x: 490, y: 220, width: 112.5, height: 80, fontSize: 18, breakMode: "space", fill: "white"},
-{ id: "技術室", label:"技術室", x: 642.5, y: 220, width: 115, height: 80, fontSize: 18, breakMode: "space", fill: "white"},
-{ id: "家庭科室", label:"家庭科室", x: 797.5, y: 220, width: 115, height: 80, fontSize: 18, breakMode: "space", fill: "white"},
-  { id: "保健室", label:"保健室", x: 912.5, y: 220, width: 77.5, height: 80, fontSize: 18, breakMode: "space", fill: "white"},
+{ id:"準備室1" ,label:"準備室" ,x :450,y :220,width :40,height :80, fontSize: 20, vertical:true, breakMode:"none" ,fill:"white"},
+{ id: "準備室2", label:"準備室", x: 602.5, y: 220, width: 40, height: 80, fontSize: 20, vertical: true, breakMode: "none", fill: "white"},
+{ id: "準備室3", label:"準備室", x: 757.5, y: 220, width: 40, height: 80, fontSize: 20, vertical: true, breakMode: "none", fill: "white"},
+{ id: "美術室", label:"美術室", x: 490, y: 220, width: 112.5, height: 80, fontSize: 20, breakMode: "space", fill: "white"},
+{ id: "技術室", label:"技術室", x: 642.5, y: 220, width: 115, height: 80, fontSize: 20, breakMode: "space", fill: "white"},
+{ id: "家庭科室", label:"家庭科室", x: 797.5, y: 220, width: 115, height: 80, fontSize: 20, breakMode: "space", fill: "white"},
+  { id: "保健室", label:"保健室", x: 912.5, y: 220, width: 77.5, height: 80, fontSize: 20, breakMode:"space" ,fill:"white"},
 
-
+{ id: "階段", label:"階段", x: 990, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#979192"},
 
 
 
