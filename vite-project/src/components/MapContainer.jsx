@@ -59,7 +59,7 @@ const MapContainer = () => {
     y="0"
     width="1848"
     height="1245"
-    opacity="0"
+    opacity="0.5"
   />
 
  {/* 左廊下一階 */}
@@ -113,6 +113,9 @@ strokeWidth="2"
   stroke="#c5b08e"
 strokeWidth="2"
   />
+  {rooms.map((room) => (
+  <Room key={room.id} {...room} />
+))}
 </svg>
 
 <div>

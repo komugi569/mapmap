@@ -1,4 +1,27 @@
-const Room = ({ name, x, y, width, height }) => {
+const Room = ({
+    x,
+    y,
+    width,
+    height,
+    fill,
+  fontSize,
+  vertical,
+  breakMode,
+  id,
+  label,
+}) => {
+
+  const text = label ?? id;
+let lines;
+
+  if (breakMode === "auto") {
+    lines = id.match(/.{1,4}/g);   // 4文字ごと
+  } else if (breakMode === "space") {
+    lines = text.split(" ");
+  } else {
+    lines = [text]; // 改行なし
+  }
+
   return (
     <>
       <rect
@@ -6,18 +29,27 @@ const Room = ({ name, x, y, width, height }) => {
         y={y}
         width={width}
         height={height}
-        fill="yellow"
+        fill={fill}
         stroke="black"
       />
       <text
         x={x + width / 2}
         y={y + height / 2}
+  writingMode={vertical ? "vertical-rl" : "horizontal-tb"}
         textAnchor="middle"
         dominantBaseline="middle"
-        fontSize="14"
-        fontWeight="bold"
+        fontSize={fontSize || 20}
       >
-        {name}
+
+ {lines.map((line, index) => (
+          <tspan
+            key={index}
+            x={x + width / 2}
+            dy={index === 0 ? 0 : 16}
+          >
+            {line}
+          </tspan>
+        ))}
       </text>
     </>
   );
