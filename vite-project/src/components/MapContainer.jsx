@@ -59,7 +59,7 @@ const MapContainer = () => {
     y="0"
     width="1848"
     height="1245"
-    opacity="0.5"
+    opacity="0.0"
   />
 
  {/* 左廊下一階 */}
