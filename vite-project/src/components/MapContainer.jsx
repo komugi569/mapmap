@@ -35,22 +35,26 @@ const MapContainer = () => {
           }}
         >
       <svg
+
+onMouseMove={(e) => {
+  const svg = e.target.closest("svg");
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX;
+  pt.y = e.clientY;
+
+  const cursorpt = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+  setCoords({
+    x: Math.round(cursorpt.x),
+    y: Math.round(cursorpt.y),
+    mouseX: e.clientX,
+    mouseY: e.clientY
+  });
+}}
+
   viewBox="0 0 1848 1245"
   width="100%"
   height="auto"
-   onMouseMove={(e) => {
-    const svg = e.target.closest("svg");
-    const pt = svg.createSVGPoint();
-    pt.x = e.clientX;
-    pt.y = e.clientY;
-    const cursorpt = pt.matrixTransform(
-      svg.getScreenCTM().inverse()
-    );
-    setCoords({
-      x: Math.round(cursorpt.x),
-      y: Math.round(cursorpt.y),
-    });
-  }}
 >
 
   <image
@@ -59,7 +63,7 @@ const MapContainer = () => {
     y="0"
     width="1848"
     height="1245"
-    opacity="0.0"
+    opacity="0.5"
   />
 
  {/* 左廊下一階 */}
@@ -118,8 +122,17 @@ strokeWidth="2"
 ))}
 </svg>
 
-<div>
-  x: {coords.x} / y: {coords.y}
+<div
+  style={{
+    position: "fixed",
+    left: coords.mouseX + 10,
+    top: coords.mouseY + 10,
+    background: "white",
+    padding: "4px",
+    border: "1px solid black"
+  }}
+>
+  {coords.x}, {coords.y}
 </div>
 
         </div>

@@ -21,7 +21,7 @@ const rooms = [
 { id:"1-3", label:"1-3", x :1262.5 ,y :615 ,width :77.5 ,height :85 ,breakMode:"none" ,fill:"yellow"},
 { id:"1-2" ,label:"1-2" ,x :1340 ,y :615 ,width :77.5 ,height :85 ,breakMode:"none" ,fill:"yellow"},
 { id:"1-1" ,label:"1-1" ,x :1417.5 ,y :615 ,width :77.5 ,height :85 ,breakMode:"none" ,fill:"yellow"},
-{ id:"1-11" ,label:"1-11" ,x :1495,y :615,width :77.5,height :85,breakMode:"none" ,fill:"yellow"},
+{ id:"1-11" ,label:"1-11" ,x :1495,y :615,width :75,height :85,breakMode:"none" ,fill:"yellow"},
   { id:"LS" ,label:"LS",x :1030,y :615,width :77.5,height :85,breakMode:"none" ,fill:"yellow"},
 
 { id: "PR Office", label:"PR Office", x: 525, y: 335, width: 77.5, height: 85, fontSize: 15, breakMode: "none", fill: "white"},
@@ -29,8 +29,8 @@ const rooms = [
 { id: "227", label:"227", x: 680, y: 335, width: 77.5, height: 85, breakMode: "none", fill: "white"},
 { id: "226", label:"226", x: 757.5, y: 335, width: 77.5, height: 85, breakMode: "none", fill: "white"},
 { id: "225", label:"225", x: 835, y: 335, width: 77.5, height: 85, breakMode: "none", fill: "white"},
-{ id: "WC", label:"WC", x: 912.5, y: 335, width: 38.75, height: 85, breakMode:"none", fill:"#8ecae6"},
-{ id:"WC" ,label:"WC" ,x :951.25 ,y :335 ,width :38.75 ,height :85 ,breakMode:"none" ,fill:"#f5bfc8"},
+{ id: "WC", label:"WC", x: 912.5, y: 335, width: 38.75, height: 85, breakMode:"none", fill:"#f5bfc8"},
+{ id:"WC2" ,label:"WC" ,x :951.25 ,y :335 ,width :38.75 ,height :85 ,breakMode:"none" ,fill:"#00c3ff"},
 { id:"準備室1" ,label:"準備室" ,x :450,y :220,width :40,height :80, fontSize: 20, vertical:true, breakMode:"none" ,fill:"white"},
 { id: "準備室2", label:"準備室", x: 602.5, y: 220, width: 40, height: 80, fontSize: 20, vertical: true, breakMode: "none", fill: "white"},
 { id: "準備室3", label:"準備室", x: 757.5, y: 220, width: 40, height: 80, fontSize: 20, vertical: true, breakMode: "none", fill: "white"},
@@ -40,6 +40,14 @@ const rooms = [
   { id: "保健室", label:"保健室", x: 912.5, y: 220, width: 77.5, height: 80, fontSize: 20, breakMode:"space" ,fill:"white"},
 
 { id: "階段", label:"階段", x: 990, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#979192"},
+{ id: "階段2", label:"階段", x: 1570, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#979192"},
+{ id: "Teacher Room 1", label:"Teacher's Room 1", x: 1030, y: 220, width: 232.5, height: 80, fontSize: 20, breakMode: "none", fill: "white"},
+{ id: "MeetingRoomA", label:"Meeting RoomA", x: 1262.5, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
+{ id: "MeetingRoomB", label:"Meeting RoomB", x: 1340, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
+{ id: "MeetingRoomC", label:"Meeting RoomC", x: 1417.5, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
+{ id: "校長室", label:"校長室", x: 1490, y: 220, width: 45, height: 80, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
+{ id: "WC Guest1", label:"WC Guest", x: 1535, y: 220, width: 17.5, height: 80, fontSize: 15, breakMode: "none", fill: "white", vertical: true, fill:"#f5bfc8"},
+{ id: "WC Guest2", label:"WC Guest", x: 1552.5, y: 220, width: 17.5, height: 80, fontSize: 15, breakMode: "none", fill: "white", vertical: true, fill:"#00c3ff"}
 
 
 
