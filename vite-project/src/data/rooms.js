@@ -39,17 +39,44 @@ const rooms = [
 { id: "家庭科室", label:"家庭科室", x: 797.5, y: 220, width: 115, height: 80, fontSize: 20, breakMode: "space", fill: "white"},
   { id: "保健室", label:"保健室", x: 912.5, y: 220, width: 77.5, height: 80, fontSize: 20, breakMode:"space" ,fill:"white"},
 
-{ id: "階段", label:"階段", x: 990, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#979192"},
-{ id: "階段2", label:"階段", x: 1570, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#979192"},
+{ id: "階段", label:"階段", x: 990, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
+{ id: "階段2", label:"階段", x: 1570, y: 220, width: 40, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
+{ id: "階段3", label:"階段", x: 447.5, y: 495, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "#f3f3f3", vertical: false,},
+{ id: "階段4", label:"階段", x: 1495, y: 495, width: 75, height: 55, fontSize: 18, breakMode: "space", fill: "#f3f3f3", vertical: false,},
 { id: "Teacher Room 1", label:"Teacher's Room 1", x: 1030, y: 220, width: 232.5, height: 80, fontSize: 20, breakMode: "none", fill: "white"},
 { id: "MeetingRoomA", label:"Meeting RoomA", x: 1262.5, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
 { id: "MeetingRoomB", label:"Meeting RoomB", x: 1340, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
 { id: "MeetingRoomC", label:"Meeting RoomC", x: 1417.5, y: 220, width: 77.5, height: 80, fontSize: 15, breakMode: "space", fill: "white"},
-{ id: "校長室", label:"校長室", x: 1490, y: 220, width: 45, height: 80, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
+{ id: "校長室", label:"校長室", x: 1495, y: 220, width: 40, height: 80, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
 { id: "WC Guest1", label:"WC Guest", x: 1535, y: 220, width: 17.5, height: 80, fontSize: 15, breakMode: "none", fill: "white", vertical: true, fill:"#f5bfc8"},
-{ id: "WC Guest2", label:"WC Guest", x: 1552.5, y: 220, width: 17.5, height: 80, fontSize: 15, breakMode: "none", fill: "white", vertical: true, fill:"#00c3ff"}
+{ id: "WC Guest2", label:"WC Guest", x: 1552.5, y: 220, width: 17.5, height: 80, fontSize: 15, breakMode: "none", fill: "white", vertical: true, fill:"#00c3ff"},
 
+{ id: "WC staff", label:"WC Staff", x: 1030, y: 335, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#00c3ff"},
+{ id: "WC staff2", label:"WC Staff", x: 1068.5, y: 335, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#f5bfc8"},
+{ id: "science LabA", label:"Science LabA", x: 1107.5, y: 335, width: 115, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, },
+{ id: "準備室4", label:"準備室", x: 1222.5, y: 335, width: 40, height: 85, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
+{ id: "準備室5", label:"準備室", x: 1262.5, y: 335, width: 40, height: 85, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
+{ id: "準備室6", label:"準備室", x: 1535, y: 335, width: 35, height: 85, fontSize: 20, breakMode: "space", fill: "white", vertical: true},
+{ id: "science LabB", label:"Science LabB", x: 1302.5, y: 335, width: 115, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, },
+{ id: "Music Room", label:"Music Room", x: 1417.5, y: 335, width: 117.5, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, },
 
+{ id: "WC3", label:"WC", x: 447.5, y: 615, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#00c3ff"},
+{ id: "WC4", label:"WC", x: 486.25, y: 615, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#f5bfc8"},
+{ id: "WC5", label:"WC", x: 1030, y: 495, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#00c3ff"},
+{ id: "WC6", label:"WC", x: 1068.75, y: 495, width: 38.75, height: 85, fontSize: 18, breakMode: "space", fill: "white", vertical: false, fill:"#f5bfc8"},
+{ id: "Changing Room1", label:"Changing Room", x: 447.5, y: 420, width: 38.75, height: 75, fontSize: 10.5, breakMode: "none", fill: "white", vertical: true,},
+{ id: "Changing Room2", label:"Changing Room", x: 447.5, y: 335, width: 38.75, height: 85, fontSize: 10, breakMode: "none", fill: "white", vertical: true,},
+{ id: "空白1", label:"", x: 1495, y: 550, width: 37.5, height: 30, fontSize: 18, breakMode: "space", vertical: false,fill: "white"},
+{ id: "EV", label:"EV", x: 1532.5, y: 550, width: 37.5, height: 30, fontSize: 18, breakMode: "space", vertical: false,fill: "white"},
+
+{ id: "Hall", label:"Hall", x: 1610, y: 370, width: 170, height: 330, fontSize: 35, breakMode: "space", vertical: false,fill: "white"},
+{ id: "空白2", label:"", x: 1610, y: 220, width: 170, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
+{ id: "中庭1", label:"", x: 525, y: 420, width: 465,height: 75,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
+{ id: "中庭2", label:"", x: 1030, y: 420, width: 540,height: 75,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
+{ id: "中学校体育館", label:"中学校体育館", x: 80, y: 700, width: 367.5, height: 475, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
+{ id: "小学校体育館", label:"小学校体育館", x: 80, y: 220, width: 290, height: 480, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
+{ id: "食堂", label:"食堂", x: 80, y: 40, width: 115, height: 180, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
+{ id: "カフェテリア", label:"カフェテリア", x: 195, y: 40, width: 330, height: 180, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
 
 ];
 
