@@ -9,6 +9,7 @@ const Room = ({
   breakMode,
   id,
   label,
+  statusData,
 }) => {
 
   const text = label ?? id;
@@ -22,6 +23,12 @@ let lines;
     lines = [text]; // 改行なし
   }
 
+  let fillColor = "#ccc";
+
+if (statusData?.status === "free") fillColor = "#62fc0a";   // 緑
+if (statusData?.status === "using") fillColor = "#F44336"; // 赤
+if (statusData?.status === "reserved") fillColor = "#12ccfa"; // 黄
+
   return (
     <>
       <rect
@@ -29,7 +36,7 @@ let lines;
         y={y}
         width={width}
         height={height}
-        fill={fill}
+        fill={fillColor}
         stroke="black"
       />
       <text

@@ -73,7 +73,7 @@ const rooms = [
 { id: "空白2", label:"", x: 1610, y: 220, width: 170, height: 80,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
 { id: "中庭1", label:"", x: 525, y: 420, width: 465,height: 75,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
 { id: "中庭2", label:"", x: 1030, y: 420, width: 540,height: 75,vertical: true, fontSize: 20, breakMode: "space", fill: "#f3f3f3"},
-{ id: "中学校体育館", label:"中学校体育館", x: 80, y: 700, width: 367.5, height: 475, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
+{ id: "中学校体育館", label:"中学校体育館", x: 80, y: 700, width: 370, height: 475, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
 { id: "小学校体育館", label:"小学校体育館", x: 80, y: 220, width: 290, height: 480, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
 { id: "食堂", label:"食堂", x: 80, y: 40, width: 115, height: 180, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
 { id: "カフェテリア", label:"カフェテリア", x: 195, y: 40, width: 330, height: 180, fontSize: 35, breakMode: "space", vertical: false,fill: "#f3f3f3"},
