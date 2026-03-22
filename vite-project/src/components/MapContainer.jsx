@@ -1,12 +1,21 @@
 import { useState } from "react";
 import Room from "./Room";
 import rooms from "../data/rooms";
-import roomStatusData from "../data/status.json";
+import { useEffect } from "react";
 
 const MapContainer = () => {
   const [scale, setScale] = useState(1);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [roomStatus, setRoomStatus] = useState(roomStatusData);
+
+  const [, setTime] = useState(0);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setTime(Date.now());
+  }, 60000); // 1分ごと
+
+  return () => clearInterval(interval);
+}, []);
 
   const zoomIn = () => setScale((prev) => prev + 0.1);
   const zoomOut = () => setScale((prev) => Math.max(0.5, prev - 0.1));
@@ -80,10 +89,9 @@ const MapContainer = () => {
   {/* 教室 */}
   <g id="rooms">
     {rooms.map((room) => (
-    <Room
+   <Room
   key={room.id}
   {...room}
-  statusData={roomStatus[room.id]}
 />
     ))}
   </g>

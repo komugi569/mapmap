@@ -1,33 +1,48 @@
-const Room = ({
+import { getRoomStatus } from "../utils/getRoomStatus";
+
+const Room = (room) => {
+  const {
     x,
     y,
     width,
     height,
-    fill,
-  fontSize,
-  vertical,
-  breakMode,
-  id,
-  label,
-  statusData,
-}) => {
+    fontSize,
+    vertical,
+    breakMode,
+    id,
+    label,
+    role,
+    color
+  } = room;
 
   const text = label ?? id;
-let lines;
+  let lines;
 
   if (breakMode === "auto") {
-    lines = id.match(/.{1,4}/g);   // 4文字ごと
+    lines = text.match(/.{1,4}/g);
   } else if (breakMode === "space") {
     lines = text.split(" ");
   } else {
-    lines = [text]; // 改行なし
+    lines = [text];
   }
 
-  let fillColor = "#ccc";
+  // ★ roleごとに状態取得
+  const { status, label: subLabel } = getRoomStatus(room);
 
-if (statusData?.status === "free") fillColor = "#62fc0a";   // 緑
-if (statusData?.status === "using") fillColor = "#F44336"; // 赤
-if (statusData?.status === "reserved") fillColor = "#12ccfa"; // 黄
+ let fillColor = "#ccc";
+
+// shapeは個別色を優先
+if (role === "shape" && color) {
+  fillColor = color;
+} else {
+  if (status === "using") fillColor = "#F44336";
+  if (status === "free") fillColor = "#62fc0a";
+  if (status === "fixed") fillColor = "#999";
+  if (status === "disabled") fillColor = "#ddd";
+}
+
+  // ★ クリック可否
+  const isClickable = role !== "noClick" && role !== "shape";
 
   return (
     <>
@@ -38,26 +53,52 @@ if (statusData?.status === "reserved") fillColor = "#12ccfa"; // 黄
         height={height}
         fill={fillColor}
         stroke="black"
+        style={{ pointerEvents: isClickable ? "auto" : "none" }}
+        onClick={() => {
+          if (isClickable) {
+            alert(`${label}：${subLabel || ""}`);
+          }
+        }}
       />
-      <text
-        x={x + width / 2}
-        y={y + height / 2}
-  writingMode={vertical ? "vertical-rl" : "horizontal-tb"}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontSize={fontSize || 20}
-      >
 
- {lines.map((line, index) => (
-          <tspan
-            key={index}
+      {/* noClickは表示しない */}
+      {role !== "noClick" && (
+        <>
+          {/* 教室名 */}
+          <text
             x={x + width / 2}
-            dy={index === 0 ? 0 : 16}
+            y={y + height / 2 - (role === "classroom" ? 10 : 0)}
+            writingMode={vertical ? "vertical-rl" : "horizontal-tb"}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize={fontSize || (role === "classroom" ? 12 : 16)}
+
           >
-            {line}
-          </tspan>
-        ))}
-      </text>
+            {lines.map((line, index) => (
+              <tspan
+                key={index}
+                x={x + width / 2}
+                dy={index === 0 ? 0 : 14}
+              >
+                {line}
+              </tspan>
+            ))}
+          </text>
+
+          {/* classroomのみ授業表示 */}
+          {role === "classroom" && (
+            <text
+              x={x + width / 2}
+              y={y + height / 2 + 12}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize={fontSize ? fontSize + 4 : 16}
+            >
+              {subLabel}
+            </text>
+          )}
+        </>
+      )}
     </>
   );
 };
