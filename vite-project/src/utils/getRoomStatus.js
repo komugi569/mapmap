@@ -1,72 +1,91 @@
 import schedule from "../data/schedule.json";
+import { periodTimes } from "../data/periodTimes";
 
-const getNowInfo = () => {
+// 曜日取得
+export const getToday = () => {
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  return days[new Date().getDay()];
+};
+
+//  これ1つだけにする（統合版）
+export const getCurrentPeriod = () => {
+  const today = getToday();
+
+  //  日課タイプ取得
+  const type = schedule.types?.[today] || "default";
+
+  //  その日の時間割を選択
+  const times = periodTimes[type] || periodTimes.default;
+
   const now = new Date();
-  const dayList = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const day = dayList[now.getDay()];
-  const time =
-    String(now.getHours()).padStart(2,"0") +
-    ":" +
-    String(now.getMinutes()).padStart(2,"0");
+  const current = now.getHours() * 60 + now.getMinutes();
 
-  return { day, time };
+  for (let i = 0; i < times.length; i++) {
+    const [sh, sm] = times[i].start.split(":").map(Number);
+    const [eh, em] = times[i].end.split(":").map(Number);
+
+    const start = sh * 60 + sm;
+    const end = eh * 60 + em;
+
+    if (current >= start && current <= end) {
+      return i;
+    }
+  }
+
+  return null;
 };
 
 export const getRoomStatus = (room) => {
   const { id, role } = room;
 
-  // ① noClick（廊下など）
+  // ① noClick
   if (role === "noClick") {
-    return {
-      status: "disabled",
-      label: null
-    };
+    return { status: "disabled", label: null };
   }
 
-  // ⑤ shape（教室名は表示させたい！！！！！！！！）
-if (role === "shape") {
-  return {
-    status: "shape",
-    label: room.label
-  };
-}
+  // ② shape
+  if (role === "shape") {
+    return { status: "shape", label: room.label };
+  }
 
-  // ② fixed（職員室など）
+  // ③ fixed
   if (role === "fixed") {
-    return {
-      status: "fixed",
-      label: room.label
-    };
+    return { status: "fixed", label: room.label };
   }
 
-  // ③ classroom（通常教室）
+  // ④ classroom
   if (role === "classroom") {
-    const { day, time } = getNowInfo();
-    const classes = schedule[id];
+    const today = getToday();
+    const period = getCurrentPeriod();
 
-    if (!classes) {
-      return { status: "free", label: "空き" };
+    if (period === null) {
+      return { status: "free", label: "" };
     }
 
-    const current = classes.find(
-      (c) => c.day === day && c.start <= time && time < c.end
-    );
-
-    if (current) {
-      return {
-        status: "using",
-        label: current.subject
-      };
+    const roomSchedule = schedule[id];
+    if (!roomSchedule) {
+      return { status: "free", label: "" };
     }
 
-    return { status: "free", label: "空き" };
+    const todaySchedule = roomSchedule[today];
+    if (!todaySchedule) {
+      return { status: "free", label: "" };
+    }
+
+    if (period >= todaySchedule.length) {
+      return { status: "free", label: "" };
+    }
+
+    const subject = todaySchedule[period];
+
+    return subject
+      ? { status: "using", label: subject }
+      : { status: "free", label: "" };
   }
 
-  // ④ fallback（未定義）
+  // fallback
   return {
     status: "free",
     label: room.label
   };
-
-
 };

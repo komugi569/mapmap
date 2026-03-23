@@ -2,6 +2,7 @@ import { useState } from "react";
 import Room from "./Room";
 import rooms from "../data/rooms";
 import { useEffect } from "react";
+import { getCurrentPeriod } from "../utils/getRoomStatus";
 
 const MapContainer = () => {
   const [scale, setScale] = useState(1);
@@ -19,9 +20,18 @@ useEffect(() => {
 
   const zoomIn = () => setScale((prev) => prev + 0.1);
   const zoomOut = () => setScale((prev) => Math.max(0.5, prev - 0.1));
+  const period = getCurrentPeriod();
+
 
   return (
+
     <div>
+
+      {/*今何時限目？？*/}
+<div style={{ marginBottom: "10px", fontSize: "18px" }}>
+      {period !== null ? `現在：${period + 1}限` : "授業時間外"}
+    </div>
+
       {/* ズームボタン */}
       <div style={{ marginBottom: "10px" }}>
         <button onClick={zoomIn}>＋</button>
@@ -114,6 +124,9 @@ useEffect(() => {
         {coords.x}, {coords.y}
       </div>
     </div>
+
+  
+
   );
 };
 

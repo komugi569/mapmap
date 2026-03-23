@@ -43,6 +43,21 @@ if (role === "shape" && color) {
 
   // ★ クリック可否
   const isClickable = role !== "noClick" && role !== "shape";
+  const nameOffset = role === "classroom" ? -fontSize / 2 : 0;
+  const subOffset = fontSize / 2 + 8;
+
+  // === 追加（これが抜けてる） ===
+const finalFontSize = fontSize || 14;
+
+const lineCount = lines.length;
+const lineHeight = finalFontSize + 2;
+const textHeight = lineCount * lineHeight;
+
+// 教室名の位置（中央寄せ）
+const nameY = y + height / 2 - textHeight / 2;
+
+// 授業名の位置（教室名の下）
+const subjectY = nameY + textHeight + 6;
 
   return (
     <>
@@ -56,7 +71,7 @@ if (role === "shape" && color) {
         style={{ pointerEvents: isClickable ? "auto" : "none" }}
         onClick={() => {
           if (isClickable) {
-            alert(`${label}：${subLabel || ""}`);
+            alert(`${label}\n${subLabel || "空き教室"}`);
           }
         }}
       />
@@ -66,37 +81,36 @@ if (role === "shape" && color) {
         <>
           {/* 教室名 */}
           <text
-            x={x + width / 2}
-            y={y + height / 2 - (role === "classroom" ? 10 : 0)}
-            writingMode={vertical ? "vertical-rl" : "horizontal-tb"}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontSize={fontSize || (role === "classroom" ? 12 : 16)}
-
-          >
-            {lines.map((line, index) => (
-              <tspan
-                key={index}
-                x={x + width / 2}
-                dy={index === 0 ? 0 : 14}
-              >
-                {line}
-              </tspan>
-            ))}
-          </text>
+  x={x + width / 2}
+  y={nameY}
+  writingMode={vertical ? "vertical-rl" : "horizontal-tb"}
+  textAnchor="middle"
+  dominantBaseline={vertical ? "middle" : "hanging"}
+  fontSize={finalFontSize}
+>
+  {lines.map((line, index) => (
+    <tspan
+      key={index}
+      x={x + width / 2}
+      dy={index === 0 ? 0 : lineHeight}
+    >
+      {line}
+    </tspan>
+  ))}
+</text>
 
           {/* classroomのみ授業表示 */}
-          {role === "classroom" && (
-            <text
-              x={x + width / 2}
-              y={y + height / 2 + 12}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fontSize={fontSize ? fontSize + 4 : 16}
-            >
-              {subLabel}
-            </text>
-          )}
+         {role === "classroom" && subLabel && (
+  <text
+    x={x + width / 2}
+    y={subjectY}
+    textAnchor="middle"
+    dominantBaseline="hanging"
+    fontSize={finalFontSize + 4}
+  >
+    {subLabel}
+  </text>
+)}
         </>
       )}
     </>
