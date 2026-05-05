@@ -90,7 +90,7 @@ const MapContainer = () => {
                 y="0"
                 width="1848"
                 height="1245"
-                opacity="0.1" 
+                opacity="0" 
               />
             </g>
 

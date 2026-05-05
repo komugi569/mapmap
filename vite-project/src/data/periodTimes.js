@@ -5,7 +5,7 @@ export const periodTimes = {
     { start: "10:40", end: "11:30" },
     { start: "11:40", end: "12:30" },
     { start: "13:20", end: "14:10" },
-    { start: "14:20", end: "17:10" }
+    { start: "14:20", end: "23:10" }
 
   ],
   short: [
