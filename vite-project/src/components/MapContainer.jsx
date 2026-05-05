@@ -4,7 +4,7 @@ import rooms from "../data/rooms";
 import { getCurrentPeriod } from "../utils/getRoomStatus";
 
 const MapContainer = () => {
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(0.5);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [currentFloor, setCurrentFloor] = useState(2); // フロア状態を追加（初期値2F）
   const [, setTime] = useState(0);
