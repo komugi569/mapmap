@@ -111,6 +111,7 @@ const MapContainer = () => {
   <div style={{ 
     fontSize: "16px", // スマホに合わせて少し小さく
     fontWeight: "bold",
+    color: "#333",
     whiteSpace: "nowrap", // 改行を防ぐ
     flexShrink: 0 // 文字が潰されるのを防ぐ
   }}>
