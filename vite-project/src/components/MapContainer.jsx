@@ -8,7 +8,9 @@ const MapContainer = () => {
   const [currentFloor, setCurrentFloor] = useState(2);
   const [, setTime] = useState(0);
 
-  // ピンチズーム用の状態管理
+  // --- 追加：移動（ドラッグ）とズーム用の状態管理 ---
+  const [coords, setCoords] = useState({ x: 0, y: 0 }); // マップの表示位置
+  const [initialTouch, setInitialTouch] = useState(null); // 開始時の指の座標
   const [initialDistance, setInitialDistance] = useState(null);
   const [initialScale, setInitialScale] = useState(null);
 
@@ -23,44 +25,49 @@ const MapContainer = () => {
   const zoomOut = () => setScale((prev) => Math.max(0.4, prev - 0.1));
   const period = getCurrentPeriod();
 
-  // --- タッチ操作ハンドラ ---
   const getDistance = (touches) => {
     const dx = touches[0].clientX - touches[1].clientX;
     const dy = touches[0].clientY - touches[1].clientY;
-    return Math.hypot(dx, dy); // 二点間の距離を算出
+    return Math.hypot(dx, dy);
   };
 
+  // --- タッチハンドラ ---
   const handleTouchStart = (e) => {
-    if (e.touches.length === 2) {
-      const dist = getDistance(e.touches);
-      setInitialDistance(dist);
+    if (e.touches.length === 1) {
+      // 一本指：移動の開始座標を記録
+      setInitialTouch({ x: e.touches[0].clientX - coords.x, y: e.touches[0].clientY - coords.y });
+    } else if (e.touches.length === 2) {
+      // 二本指：ズームの準備
+      setInitialDistance(getDistance(e.touches));
       setInitialScale(scale);
     }
   };
 
   const handleTouchMove = (e) => {
-    if (e.touches.length === 2 && initialDistance !== null) {
+    if (e.touches.length === 1 && initialTouch) {
+      // 一本指：移動処理
+      const newX = e.touches[0].clientX - initialTouch.x;
+      const newY = e.touches[0].clientY - initialTouch.y;
+      setCoords({ x: newX, y: newY });
+    } else if (e.touches.length === 2 && initialDistance !== null) {
+      // 二本指：ズーム処理
       const currentDistance = getDistance(e.touches);
       const ratio = currentDistance / initialDistance;
-      
-      // 指の動きに合わせて新しい倍率を計算（最小0.4〜最大3.0に制限）
-      const newScale = Math.min(Math.max(initialScale * ratio, 0.4), 3.0);
-      setScale(newScale);
+      setScale(Math.min(Math.max(initialScale * ratio, 0.4), 3.0));
     }
   };
 
   const handleTouchEnd = () => {
+    setInitialTouch(null);
     setInitialDistance(null);
-    setInitialScale(null);
   };
-  // -----------------------
 
   const filteredRooms = rooms.filter((room) => room.floor === currentFloor);
 
   return (
-    <div>
+    <div style={{ position: "fixed", width: "100%", height: "100%", overflow: "hidden" }}>
       {/* ステータス表示エリア */}
-      <div style={{ display: "flex", gap: "20px", alignItems: "center", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "center", padding: "10px", background: "white", zIndex: 10 }}>
         <div style={{ fontSize: "18px", fontWeight: "bold" }}>
           {period !== null ? `現在：${period + 1}限` : "授業時間外"}
         </div>
@@ -86,31 +93,39 @@ const MapContainer = () => {
       </div>
 
       {/* ズームボタン */}
-      <div style={{ marginBottom: "10px" }}>
-        <button onClick={zoomIn} style={{ width: "40px", height: "40px", marginRight: "5px" }}>＋</button>
-        <button onClick={zoomOut} style={{ width: "40px", height: "40px" }}>－</button>
+      <div style={{ position: "absolute", bottom: "20px", right: "20px", display: "flex", flexDirection: "column", gap: "10px", zIndex: 10 }}>
+        <button onClick={zoomIn} style={{ width: "50px", height: "50px", borderRadius: "25px", fontSize: "24px", border: "none", boxShadow: "0 2px 5px rgba(0,0,0,0.2)" }}>＋</button>
+        <button onClick={zoomOut} style={{ width: "50px", height: "50px", borderRadius: "25px", fontSize: "24px", border: "none", boxShadow: "0 2px 5px rgba(0,0,0,0.2)" }}>－</button>
       </div>
 
-      {/* マップ表示エリア */}
+      {/* マップ表示エリア（ここが重要） */}
       <div
         style={{
-          overflow: "auto",
-          border: "1px solid black",
-          width: "100%",
-          height: "80vh",
+          width: "100vw",
+          height: "100vh",
           backgroundColor: "#f9f9f9",
-          touchAction: "none" // ブラウザ標準のズーム動作を防止
+          touchAction: "none", // ブラウザの挙動を完全に制御
+          cursor: "grab",
+          overflow: "hidden"
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onMouseDown={(e) => setInitialTouch({ x: e.clientX - coords.x, y: e.clientY - coords.y })} // PCマウス対応
+        onMouseMove={(e) => {
+          if (initialTouch) {
+            setCoords({ x: e.clientX - initialTouch.x, y: e.clientY - initialTouch.y });
+          }
+        }}
+        onMouseUp={() => setInitialTouch(null)}
       >
         <div
           style={{
-            transform: `scale(${scale})`,
+            transform: `translate(${coords.x}px, ${coords.y}px) scale(${scale})`,
             transformOrigin: "0 0",
             width: "1848px",
             height: "1245px",
+            transition: initialTouch ? "none" : "transform 0.1s ease-out" // 移動中はスムーズに、放すとピタッと
           }}
         >
           <svg viewBox="0 0 1848 1245" width="100%" height="100%">
@@ -118,36 +133,13 @@ const MapContainer = () => {
               <rect width="100%" height="100%" fill="white" />
             </g>
 
-            <g id="map-image">
-              <image
-                href={currentFloor === 2 ? "/map2F.jpg" : "/map3F.jpg"}
-                x="0"
-                y="0"
-                width="1848"
-                height="1245"
-                opacity="0" 
-              />
-            </g>
-
+            {/* 廊下と教室の描画はそのまま */}
             {(currentFloor === 2 || currentFloor === 3) && (
               <g id="corridors">
                 {currentFloor === 2 && (
-                  <path
-                    d="M 370 700 H 450 V 220 H 370 Z"
-                    fill="rgba(232,211,181,0.7)"
-                    stroke="#c5b08e"
-                    strokeWidth="2"
-                  />
+                  <path d="M 370 700 H 450 V 220 H 370 Z" fill="rgba(232,211,181,0.7)" stroke="#c5b08e" strokeWidth="2" />
                 )}
-                <path
-                  d="M 450 300 H 1780 V 370 H 1610 V 700 H 1570 V 615 H 1030 V 700 H 990 V 615 H 450 V 580 H 490 V 335 H 450 Z 
-                     M 525 335 H 990 V 580 H 525 Z 
-                     M 1030 335 H 1570 V 580 H 1030 Z"
-                  fill="rgba(232,211,181,0.7)"
-                  fillRule="evenodd"
-                  stroke="#c5b08e"
-                  strokeWidth="2"
-                />
+                <path d="M 450 300 H 1780 V 370 H 1610 V 700 H 1570 V 615 H 1030 V 700 H 990 V 615 H 450 V 580 H 490 V 335 H 450 Z M 525 335 H 990 V 580 H 525 Z M 1030 335 H 1570 V 580 H 1030 Z" fill="rgba(232,211,181,0.7)" fillRule="evenodd" stroke="#c5b08e" strokeWidth="2" />
               </g>
             )}
 
