@@ -94,33 +94,52 @@ const MapContainer = () => {
 
   return (
     <div style={{ position: "fixed", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* ステータス表示エリア */}
-      <div style={{ display: "flex", gap: "20px", alignItems: "center", padding: "10px", background: "white", zIndex: 10, borderBottom: "1px solid #ddd" }}>
-        <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-          {period !== null ? `現在：${period + 1}限` : "授業時間外"}
-        </div>
-        
-        <div style={{ display: "flex", gap: "5px", background: "#eee", padding: "5px", borderRadius: "8px" }}>
-          {[2, 3].map((f) => (
-            <button
-              key={f}
-              onClick={() => setCurrentFloor(f)}
-              style={{
-                padding: "5px 15px",
-                backgroundColor: currentFloor === f ? "#007bff" : "#fff",
-                color: currentFloor === f ? "#fff" : "#000",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                cursor: "pointer",
-                fontWeight: "bold"
-              }}
-            >
-              {f}F
-            </button>
-          ))}
-        </div>
-      </div>
-
+     {/* ステータス表示エリア */}
+<div style={{ 
+  display: "flex", 
+  justifyContent: "space-between", // 左右に振り分ける
+  alignItems: "center", 
+  padding: "10px 15px", 
+  paddingTop: "max(10px, env(safe-area-inset-top))", // iPhoneのノッチ対策
+  background: "rgba(255, 255, 255, 0.95)", // 少し透かした白
+  zIndex: 100, // マップより確実に上に表示
+  position: "relative", // z-indexを有効にする
+  borderBottom: "1px solid #ddd",
+  boxShadow: "0 2px 5px rgba(0,0,0,0.1)" // 境目をわかりやすく
+}}>
+  {/* 左側：何時限目か */}
+  <div style={{ 
+    fontSize: "16px", // スマホに合わせて少し小さく
+    fontWeight: "bold",
+    whiteSpace: "nowrap", // 改行を防ぐ
+    flexShrink: 0 // 文字が潰されるのを防ぐ
+  }}>
+    {period !== null ? `現在：${period + 1}限` : "授業時間外"}
+  </div>
+  
+  {/* 右側：フロア切り替え */}
+  <div style={{ display: "flex", gap: "5px", background: "#eee", padding: "3px", borderRadius: "8px" }}>
+    {[2, 3].map((f) => (
+      <button
+        key={f}
+        onClick={() => setCurrentFloor(f)}
+        style={{
+          padding: "6px 12px",
+          fontSize: "14px",
+          backgroundColor: currentFloor === f ? "#007bff" : "transparent",
+          color: currentFloor === f ? "#fff" : "#333",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          transition: "0.2s"
+        }}
+      >
+        {f}F
+      </button>
+    ))}
+  </div>
+</div>
       {/* マップ表示エリア */}
       <div
         style={{
